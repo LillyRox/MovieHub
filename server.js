@@ -1,36 +1,29 @@
-// server.js — sirve archivos estáticos y ofrece proxies API seguros
+// server.js 
 const express = require('express');
 const path = require('path');
-const { fileURLToPath } = require('url'); // opcional si usas ESM; aquí usamos CommonJS
-const fetch = global.fetch || require('node-fetch'); // Node 18+ ya tiene fetch
-const axios = require("axios"); //new
-const OMDB_API_KEY = "2e787881"; // Tu API Key de OMDb //new
+const { fileURLToPath } = require('url'); 
+const fetch = global.fetch || require('node-fetch');
+const axios = require("axios"); 
+const OMDB_API_KEY = "2e787881";
 
-require('dotenv').config(); // si vas a usar .env (instalar dotenv)
+require('dotenv').config(); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// RUTA donde están tus archivos estáticos:
 const PUBLIC_DIR = path.join(__dirname, 'public');
 
-// Servir archivos estáticos (index.html, css/, js/, assets/)
+
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 
-// Ruta raiz: devolver index.html
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
-/**
- * OPCIONAL Y RECOMENDADO:
- * Proxy server-side para TMDb — evita exponer tu API key en el cliente.
- * Ejemplo: /api/trending, /api/search?q=..., /api/details/:type/:id
- *
- * Asegúrate de definir TMDB_ACCESS_TOKEN o TMDB_API_KEY en tu .env
- */
 
-// Ejemplo: trending
+
+
 app.get('/api/trending', async (req, res) => {
   try {
     const resp = await fetch('https://api.themoviedb.org/3/trending/all/week?language=en-US', {
@@ -44,7 +37,7 @@ app.get('/api/trending', async (req, res) => {
   }
 });
 
-// Ejemplo: search multi
+
 app.get('/api/search', async (req, res) => {
   const q = req.query.q;
   if (!q) return res.status(400).json({ error: 'Missing q parameter' });
@@ -61,7 +54,7 @@ app.get('/api/search', async (req, res) => {
   }
 });
 
-// Ejemplo: details
+
 app.get('/api/details/:type/:id', async (req, res) => {
   const { type, id } = req.params;
   try {
@@ -77,7 +70,7 @@ app.get('/api/details/:type/:id', async (req, res) => {
   }
 });
 
-// Ruta para obtener datos de OMDb por título //new
+
 app.get("/api/omdb/:title", async (req, res) => {
   try {
     const title = req.params.title;
@@ -89,16 +82,13 @@ app.get("/api/omdb/:title", async (req, res) => {
   }
 });
 
-// 404 fallback: si quieres devolver index.html (útil para SPA), descomenta lo siguiente:
-// app.use((req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
 
-// Error handler básico
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Server error');
 });
 
-// Start
+
 app.listen(PORT, () => {
   console.log(`🎬 MovieHub server is running at http://localhost:${PORT}`);
 });
