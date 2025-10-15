@@ -8,7 +8,7 @@ function render() {
   const favs = getFavorites();
   grid.innerHTML = '';
   if (!favs.length) {
-    grid.innerHTML = '<p>No tienes favoritos aún. Agrega algunos desde la página de detalle.</p>';
+    grid.innerHTML = '<p>You do not have favorites yet.</p>';
     return;
   }
 
