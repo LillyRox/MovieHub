@@ -1,0 +1,125 @@
+/* css/style.css */
+/* Theme colors */
+:root{
+  --bg: #0D0D0D;
+  --text: #FFFFFF;
+  --accent: #E50914;
+  --highlight: #FFD700;
+  --muted: #B3B3B3;
+  --max-width: 1200px;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  font-family: "Roboto", sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+}
+
+/* Header */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.brand{
+  display:flex;
+  gap:.75rem;
+  align-items:center;
+}
+.brand h1{
+  font-family:"Bebas Neue", cursive;
+  margin:0;
+  font-size:2rem;
+  letter-spacing:1px;
+  color:var(--accent);
+}
+
+/* Search bar */
+.search-bar{
+  display:flex;
+  gap:.5rem;
+  align-items:center;
+}
+.search-bar input{
+  padding:.6rem .75rem;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color:var(--text);
+  min-width:260px;
+}
+.search-bar button{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:.65rem .85rem;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+/* Main container */
+.container{
+  max-width:var(--max-width);
+  margin:1.25rem auto;
+  padding:0 1rem;
+}
+
+/* Grid */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap:1rem;
+}
+
+/* Card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition: transform .16s ease, box-shadow .16s ease;
+  cursor:pointer;
+}
+.card:hover{ transform: translateY(-6px); box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+.card img{ width:100%; height:240px; object-fit:cover; display:block; }
+.card .meta{ padding:.6rem; display:flex; flex-direction:column; gap:.25rem; }
+.card .title{ font-weight:700; font-size:0.95rem; color:var(--text); }
+.card .sub{ font-size:.8rem; color:var(--muted) }
+
+/* Controls (filters) */
+.controls{ display:flex; gap:.5rem; align-items:center; margin: .75rem 0; flex-wrap:wrap; }
+.btn{ background:transparent; border:1px solid rgba(255,255,255,0.06); padding:.45rem .6rem; border-radius:8px; color:var(--text); cursor:pointer;}
+.btn.primary{ background:var(--accent); border: none; color:#fff; }
+
+/* Details */
+.details{
+  display:grid;
+  grid-template-columns: 1fr 2fr;
+  gap:1rem;
+  align-items:start;
+}
+.poster{ max-width:340px; border-radius:8px; overflow:hidden; }
+.info h2{ margin:0 0 .5rem 0; font-family:"Bebas Neue"; font-size:2.25rem; color:var(--highlight); }
+.info p{ margin:.5rem 0; color:var(--muted) }
+
+/* Footer */
+.footer{ padding:1rem; text-align:center; color:var(--muted); font-size:.85rem; }
+
+/* Responsive */
+@media (max-width:900px){
+  .details{ grid-template-columns: 1fr; }
+  .card img{ height:200px; }
+  .brand h1{ font-size:1.6rem; }
+}

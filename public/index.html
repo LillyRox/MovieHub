@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MovieHub</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/moviehub-theme.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1 class="logo">🎬 MovieHub</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="favorites.html">Favorites</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="search-section">
+  <input type="text" id="searchInput" placeholder="Search titles, actors or directors..." />
+  <select id="mediaType">
+    <option value="multi">All</option>
+    <option value="movie">Movies</option>
+    <option value="tv">TV</option>
+  </select>
+  <select id="genreSelect"><option value="">All genres</option></select>
+  <button id="searchBtn">Search</button>
+</section>
+
+
+    <section id="trending-section">
+      <h2>Trending This Week</h2>
+      <div id="trendingContainer" class="grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MovieHub</p>
+  </footer>
+
+  <script type="module" src="js/main.mjs"></script>
+</body>
+</html>
